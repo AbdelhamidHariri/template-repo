@@ -1,0 +1,38 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Authentication service",
+    "version": "1.0.0"
+  },
+  "paths": {
+  },
+  "components": {
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "error": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "default": 123
+          },
+          "message": {
+            "type": "string",
+            "default": "Something went wrong"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  },
+  "tags": []
+}
