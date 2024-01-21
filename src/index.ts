@@ -2,16 +2,18 @@ import "newrelic";
 import express from "express";
 import { initSwagger } from "./swagger/swagger";
 import { errorMiddleware } from "./middlewares/error.middleware";
-import pino from "pino-http";
+import { authenticate } from "./middlewares/auth.middleware";
 
 const app = express();
 const port = 3000;
 
-app.use(pino());
 app.use(express.json());
 initSwagger(app);
-errorMiddleware(app);
+authenticate(app);
 
+//route handlers
+
+errorMiddleware(app);
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
   console.log(`Swagger is running at http://localhost:${port}/swagger`);
