@@ -1,7 +1,6 @@
 /*instrumentation.ts*/
 import { NodeSDK } from "@opentelemetry/sdk-node";
 import { getNodeAutoInstrumentations } from "@opentelemetry/auto-instrumentations-node";
-import { PeriodicExportingMetricReader, ConsoleMetricExporter } from "@opentelemetry/sdk-metrics";
 import { Resource } from "@opentelemetry/resources";
 import { SemanticResourceAttributes } from "@opentelemetry/semantic-conventions";
 import pkg from "./package.json";
@@ -33,11 +32,17 @@ const sdk = new NodeSDK({
   }),
   instrumentations: [
     getNodeAutoInstrumentations({
+      "@opentelemetry/instrumentation-http": {
+        enabled: true,
+      },
       "@opentelemetry/instrumentation-pg": {
         requireParentSpan: true,
         enhancedDatabaseReporting: true,
       },
       "@opentelemetry/instrumentation-express": {
+        enabled: true,
+      },
+      "@opentelemetry/instrumentation-amqplib": {
         enabled: true,
       },
     }),
